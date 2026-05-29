@@ -23,4 +23,21 @@ public class AppConstants {
 
     // PhisicalBook Field Keys
     public static final String PAGES = "Pages";
+
+    // ANSI escape codes for color-coded console logs
+    public static final String DATE_TIME_FORMATTER = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String INFO = "INFO";
+    public static final String CYAN = "\u001B[36m";
+
+    public static final String SUCCESS = "SUCCESS";
+    public static final String GREEN = "\u001B[32m";
+
+    public static final String WARN = "WARN";
+    public static final String YELLOW = "\u001B[33m";
+
+    public static final String ERROR = "ERROR";
+    public static final String RED = "\u001B[31m";
+
+    public static final String RESET = "\u001B[0m";
 }

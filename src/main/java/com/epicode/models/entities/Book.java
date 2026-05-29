@@ -1,4 +1,4 @@
-package com.epicode.models;
+package com.epicode.models.entities;
 
 import com.epicode.models.enums.BookType;
 import com.epicode.utils.AppConstants;
