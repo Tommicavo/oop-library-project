@@ -5,18 +5,18 @@ import com.epicode.models.entities.Book;
 import com.epicode.models.enums.BookType;
 import com.epicode.utils.AppLogger;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap; 
 import java.util.stream.Collectors;
 
 public class BookRepository implements AppRepository<Book> {
 
-    private final Map<Long, Book> bookData = new HashMap<>();
+    private final Map<Long, Book> bookData = new ConcurrentHashMap<>();
 
     @Override
     public List<Book> findAll() {
-        AppLogger.info("Fetching all books from the repository");
+        AppLogger.info("Fetching all books from the thread-safe repository");
         return new ArrayList<>(bookData.values());
     }
 
@@ -48,7 +48,7 @@ public class BookRepository implements AppRepository<Book> {
         }
 
         bookData.put(entity.getId(), entity);
-        AppLogger.success("Successfully saved new book: '" + entity.getTitle() + "' [ID: " + entity.getId() + "]");
+        AppLogger.success("Successfully saved new book: '" + entity.getTitle() + "' [ID: " + entity.getId() + "] on thread: " + Thread.currentThread().getName());
         return entity;
     }
 
