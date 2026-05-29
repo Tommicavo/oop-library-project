@@ -1,15 +1,16 @@
 package com.epicode.models.entities;
 
 import com.epicode.models.enums.BookType;
+import com.epicode.utils.AppConstants;
 import com.epicode.utils.InputValidation;
 
 public class AudioBook extends Book {
 
     private Integer narrationMinutes;
 
-    public AudioBook(Object id, String title, String author, Object publicationYear, Object narrationMinutes) {
+    public AudioBook(Object id, String title, String author, Integer publicationYear, Integer narrationMinutes) {
         super(id, title, author, publicationYear);
-        this.narrationMinutes = InputValidation.validateInteger(narrationMinutes, 1, "Narration Minutes");
+        this.narrationMinutes = InputValidation.validateInteger(narrationMinutes, 1, AppConstants.NARRATION_MINUTES);
     }
 
     // Getter and Setter

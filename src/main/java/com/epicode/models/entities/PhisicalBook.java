@@ -1,15 +1,18 @@
 package com.epicode.models.entities;
 
 import com.epicode.models.enums.BookType;
+import com.epicode.utils.AppConstants;
 import com.epicode.utils.InputValidation;
 
 public class PhisicalBook extends Book {
 
     private Integer pages;
+    private boolean isHardCover;
 
-    public PhisicalBook(Object id, String title, String author, Object publicationYear, Object pages) {
+    public PhisicalBook(Object id, String title, String author, Integer publicationYear, Integer pages, boolean isHardCover) {
         super(id, title, author, publicationYear);
-        this.pages = InputValidation.validateInteger(pages, 1, "Pages");
+        this.pages = InputValidation.validateInteger(pages, 1, AppConstants.PAGES);
+        this.isHardCover = isHardCover;
     }
 
     // Getter and Setter
@@ -21,6 +24,14 @@ public class PhisicalBook extends Book {
         this.pages = pages;
     }
 
+    public boolean isHardCover() {
+        return isHardCover;
+    }
+
+    public void setHardCover(boolean isHardCover) {
+        this.isHardCover = isHardCover;
+    }
+    
     // Parent class abstract method implementation
     @Override
     public BookType getBookType() {

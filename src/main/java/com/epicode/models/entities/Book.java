@@ -11,7 +11,7 @@ public abstract class Book {
     private String author;
     private Integer publicationYear;
 
-    public Book(Object id, String title, String author, Object publicationYear) {
+    public Book(Object id, String title, String author, Integer publicationYear) {
         this.id = InputValidation.validateLong(id, AppConstants.MIN_ID, AppConstants.ID);
         this.title = InputValidation.validateString(title, AppConstants.TITLE);
         this.author = InputValidation.validateString(author, AppConstants.AUTHOR);
