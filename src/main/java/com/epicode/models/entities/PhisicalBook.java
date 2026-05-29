@@ -43,6 +43,7 @@ public class PhisicalBook extends Book {
         return super.getInfo() +
             "- Addition Info:" + "\n" +
             "Book Type: '" + getBookType() + "'\n" +
-            "Pages: " + pages;
+            "Pages: " + pages + "\n" +
+            "Cover: " + (isHardCover() ? "Hard" : "Soft"); 
     }
 }

@@ -61,7 +61,7 @@ public abstract class Book implements BookComponent{
     // Other methods
     public String getInfo() {
         return
-            "BOOK INFO" + "\n" +
+            "\nBOOK INFO" + "\n" +
             "- Base Info:" + "\n" +
             "Title: " + title + "\n" +
             "Author: " + author + "\n" +
