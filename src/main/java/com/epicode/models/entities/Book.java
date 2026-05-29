@@ -1,5 +1,7 @@
 package com.epicode.models.entities;
 
+import com.epicode.iterator.BookIterator;
+import com.epicode.iterator.SingleBookIterator;
 import com.epicode.models.composite.BookComponent;
 import com.epicode.models.enums.BookType;
 import com.epicode.utils.AppConstants;
@@ -75,5 +77,10 @@ public abstract class Book implements BookComponent{
     @Override
     public boolean isComposite() {
         return false;
+    }
+
+    @Override
+    public BookIterator iterator() {
+        return new SingleBookIterator(this);
     }
 }

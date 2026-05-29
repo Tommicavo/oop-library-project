@@ -2,6 +2,8 @@ package com.epicode.models.composite;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.epicode.iterator.BookIterator;
+import com.epicode.iterator.CollectionBookIterator;
 
 public class BookCollection implements BookComponent {
     
@@ -10,6 +12,10 @@ public class BookCollection implements BookComponent {
 
     public BookCollection(String collectionName) {
         this.collectionName = collectionName;
+    }
+
+    public List<BookComponent> getComponents() {
+        return new ArrayList<>(children);
     }
 
     public void add(BookComponent component) {
@@ -42,5 +48,10 @@ public class BookCollection implements BookComponent {
     @Override
     public boolean isComposite() {
         return true;
+    }
+
+    @Override
+    public BookIterator iterator() {
+        return new CollectionBookIterator(this);
     }
 }
