@@ -2,15 +2,17 @@ package com.epicode.models.repositories;
 
 import com.epicode.exceptions.BookNotFoundException;
 import com.epicode.models.entities.Book;
+import com.epicode.models.enums.BookType;
 import com.epicode.utils.AppLogger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BookRepository implements AppRepository<Book> {
 
-    private final Map<Long, com.epicode.models.entities.Book> bookData = new HashMap<>();
+    private final Map<Long, Book> bookData = new HashMap<>();
 
     @Override
     public List<Book> findAll() {
@@ -94,5 +96,45 @@ public class BookRepository implements AppRepository<Book> {
         bookData.clear();
         AppLogger.success("Repository cleared successfully");
         return true;
+    }
+
+    public List<Book> findByAuthor(String author) {
+        if (author == null || author.trim().isEmpty()) {
+            AppLogger.warn("findByAuthor called with an empty author name");
+            return List.of();
+        }
+        
+        AppLogger.info("Filtering catalog for author: '" + author + "'");
+        
+        return bookData.values().stream()
+                .filter(book -> book.getAuthor().equalsIgnoreCase(author.trim()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Book> findByTitle(String titleKeyword) {
+        if (titleKeyword == null || titleKeyword.trim().isEmpty()) {
+            AppLogger.warn("findByTitle called with an empty keyword");
+            return List.of();
+        }
+
+        String keyword = titleKeyword.toLowerCase().trim();
+        AppLogger.info("Searching titles containing keyword: '" + keyword + "'");
+
+        return bookData.values().stream()
+                .filter(book -> book.getTitle().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
+    }
+
+    public List<Book> findByBookType(BookType type) {
+        if (type == null) {
+            AppLogger.error("findByBookType called with a null type");
+            throw new IllegalArgumentException("BookType cannot be null");
+        }
+
+        AppLogger.info("Filtering catalog for format type: " + type);
+
+        return bookData.values().stream()
+                .filter(book -> book.getBookType() == type)
+                .collect(Collectors.toList());
     }
 }
