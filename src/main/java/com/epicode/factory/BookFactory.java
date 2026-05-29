@@ -6,6 +6,16 @@ import com.epicode.models.entities.Book;
 import com.epicode.models.entities.PhisicalBook;
 import com.epicode.models.enums.BookType;
 
+/*
+With BookFactory we can create Book without specifying the exact class
+Instead of doing:
+Book book1 = new PhisicalBook(1L, "title", "author", 2026, 150, true);
+Book book2 = new AudioBook(2L, "title", "author", 2026, 180);
+
+We can just use createBook method of BookFactory passing the BookType:
+Book book1 = BookFactory.createBook(1L, "title", "author", 2026, 150, true);
+Book book2 = BookFactory.createBook(2L, "title", "author", 2026, 180);
+*/
 public class BookFactory {
     
     public static Book createBook(BookType type, Long id, String title, String author, Integer publicationYear, Object... extraParams) {

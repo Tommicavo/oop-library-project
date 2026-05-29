@@ -1,10 +1,11 @@
 package com.epicode.models.entities;
 
+import com.epicode.models.composite.BookComponent;
 import com.epicode.models.enums.BookType;
 import com.epicode.utils.AppConstants;
 import com.epicode.utils.InputValidation;
 
-public abstract class Book {
+public abstract class Book implements BookComponent{
 
     private Long id;
     private String title;
@@ -63,5 +64,16 @@ public abstract class Book {
             "Title: " + title + "\n" +
             "Author: " + author + "\n" +
             "Year: " + publicationYear + "\n";
+    }
+
+    // Methods defined in BookComponent (common to both AudioBook and PhisicalBook so we override them here)
+    @Override
+    public int getBookCount() {
+        return 1;
+    }
+
+    @Override
+    public boolean isComposite() {
+        return false;
     }
 }
