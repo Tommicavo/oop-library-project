@@ -1,5 +1,9 @@
 package com.epicode.models;
 
+import com.epicode.models.enums.BookType;
+import com.epicode.utils.AppConstants;
+import com.epicode.utils.InputValidation;
+
 public abstract class Book {
 
     private Long id;
@@ -7,11 +11,11 @@ public abstract class Book {
     private String author;
     private Integer publicationYear;
 
-    public Book(Long id, String title, String author, Integer publicationYear) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
+    public Book(Object id, String title, String author, Object publicationYear) {
+        this.id = InputValidation.validateLong(id, AppConstants.MIN_ID, AppConstants.ID);
+        this.title = InputValidation.validateString(title, AppConstants.TITLE);
+        this.author = InputValidation.validateString(author, AppConstants.AUTHOR);
+        this.publicationYear = InputValidation.validateInteger(publicationYear, AppConstants.MIN_YEAR, AppConstants.PUBLICATION_YEAR);
     }
 
     // Getter and Setter
@@ -48,7 +52,7 @@ public abstract class Book {
     }
 
     // Abstract methods: they will be implemented by concrete sub-classes
-    public abstract String getBookType();
+    public abstract BookType getBookType();
     public abstract String printInfo();
 
     // Other methods

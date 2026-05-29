@@ -1,12 +1,15 @@
 package com.epicode.models;
 
+import com.epicode.models.enums.BookType;
+import com.epicode.utils.InputValidation;
+
 public class PhisicalBook extends Book {
 
     private Integer pages;
 
-    public PhisicalBook(Long id, String title, String author, Integer publicationYear, Integer pages) {
+    public PhisicalBook(Object id, String title, String author, Object publicationYear, Object pages) {
         super(id, title, author, publicationYear);
-        this.pages = pages;
+        this.pages = InputValidation.validateInteger(pages, 1, "Pages");
     }
 
     // Getter and Setter
@@ -20,8 +23,8 @@ public class PhisicalBook extends Book {
 
     // Parent class abstract method implementation
     @Override
-    public String getBookType() {
-        return "PHISICAL-BOOK";
+    public BookType getBookType() {
+        return BookType.PHYSICAL_BOOK;
     }
 
     @Override

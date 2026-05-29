@@ -1,12 +1,15 @@
 package com.epicode.models;
 
+import com.epicode.models.enums.BookType;
+import com.epicode.utils.InputValidation;
+
 public class AudioBook extends Book {
 
     private Integer narrationMinutes;
 
-    public AudioBook(Long id, String title, String author, Integer publicationYear, Integer narrationMinutes) {
+    public AudioBook(Object id, String title, String author, Object publicationYear, Object narrationMinutes) {
         super(id, title, author, publicationYear);
-        this.narrationMinutes = narrationMinutes;
+        this.narrationMinutes = InputValidation.validateInteger(narrationMinutes, 1, "Narration Minutes");
     }
 
     // Getter and Setter
@@ -20,8 +23,8 @@ public class AudioBook extends Book {
 
     // Parent class abstract method implementation
     @Override
-    public String getBookType() {
-        return "AUDIO-BOOK";
+    public BookType getBookType() {
+        return BookType.AUDIO_BOOK;
     }
 
     @Override
